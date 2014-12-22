@@ -1,0 +1,184 @@
+package zombie_crush_saga;
+
+import javax.swing.JFrame;
+import zombie_crush_saga.ui.ZombieCrushSagaMiniGame;
+import zombie_crush_saga.ui.MahjongSolitaireErrorHandler;
+import xml_utilities.InvalidXMLFileFormatException;
+import properties_manager.PropertiesManager;
+
+//ZOMBIE CRUSH SHIT
+
+/**
+ * ZombieCrushSaga is a game application that's ready to be customized
+ * to play different flavors of the game. It has been setup using art
+ * from Plants vs. Zombies.
+ * 
+ * @author Luigi Keh && Richard McKenna
+ */
+public class ZombieCrushSaga
+{
+    // THIS HAS THE FULL USER INTERFACE AND ONCE IN EVENT
+    // HANDLING MODE, BASICALLY IT BECOMES THE FOCAL
+    // POINT, RUNNING THE UI AND EVERYTHING ELSE
+    static ZombieCrushSagaMiniGame miniGame = new ZombieCrushSagaMiniGame();
+    
+    // WE'LL LOAD ALL THE UI AND ART PROPERTIES FROM FILES,
+    // BUT WE'LL NEED THESE VALUES TO START THE PROCESS
+    static String PROPERTY_TYPES_LIST = "property_types.txt";
+    static String UI_PROPERTIES_FILE_NAME = "properties.xml";
+    static String PROPERTIES_SCHEMA_FILE_NAME = "properties_schema.xsd";    
+    static String DATA_PATH = "./data/";
+
+    /**
+     * This is where the Zombie Crush Saga game application starts execution. We'll
+     * load the application properties and then use them to build our
+     * user interface and start the window in event handling mode. Once
+     * in that mode, all code execution will happen in response to a 
+     * user request.
+     */
+    public static void main(String[] args)
+    {
+        new JFrame(); //black magic. do not remove or else this program may crash.
+        try
+        {
+            // LOAD THE SETTINGS FOR STARTING THE APP
+            PropertiesManager props = PropertiesManager.getPropertiesManager();
+            props.addProperty(ZombieCrushSagaPropertyType.UI_PROPERTIES_FILE_NAME, UI_PROPERTIES_FILE_NAME);
+            props.addProperty(ZombieCrushSagaPropertyType.PROPERTIES_SCHEMA_FILE_NAME, PROPERTIES_SCHEMA_FILE_NAME);
+            props.addProperty(ZombieCrushSagaPropertyType.DATA_PATH.toString(), DATA_PATH);
+            props.loadProperties(UI_PROPERTIES_FILE_NAME, PROPERTIES_SCHEMA_FILE_NAME);
+            
+            // THEN WE'LL LOAD THE ZombieCrushSaga FLAVOR AS SPECIFIED BY THE PROPERTIES FILE
+            String gameFlavorFile = props.getProperty(ZombieCrushSagaPropertyType.GAME_FLAVOR_FILE_NAME);
+            props.loadProperties(gameFlavorFile, PROPERTIES_SCHEMA_FILE_NAME);
+                               
+            // NOW WE CAN LOAD THE UI, WHICH WILL USE ALL THE FLAVORED CONTENT
+            String appTitle = props.getProperty(ZombieCrushSagaPropertyType.GAME_TITLE_TEXT);
+            int fps = Integer.parseInt(props.getProperty(ZombieCrushSagaPropertyType.FPS));
+
+            miniGame.initMiniGame(appTitle, fps);
+            miniGame.startGame();
+        }
+        // THERE WAS A PROBLEM LOADING THE PROPERTIES FILE
+        catch(InvalidXMLFileFormatException ixmlffe)
+        {
+            // LET THE ERROR HANDLER PROVIDE THE RESPONSE
+            MahjongSolitaireErrorHandler errorHandler = miniGame.getErrorHandler();
+            errorHandler.processError(ZombieCrushSagaPropertyType.INVALID_XML_FILE_ERROR_TEXT);
+        }
+    }
+    
+    /**
+     * Mahjong SolitairePropertyType represents the types of data that will need
+     * to be extracted from XML files.
+     */
+    public enum ZombieCrushSagaPropertyType
+    {
+        //from the XML. their property names
+        
+        /* SETUP FILE NAMES */
+        UI_PROPERTIES_FILE_NAME,
+        PROPERTIES_SCHEMA_FILE_NAME,
+        GAME_FLAVOR_FILE_NAME,
+        RECORD_FILE_NAME,
+
+        /* DIRECTORIES FOR FILE LOADING */
+        AUDIO_PATH,
+        DATA_PATH,
+        IMG_PATH,
+        
+        /* WINDOW DIMENSIONS & FRAME RATE */
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        FPS,
+        GAME_WIDTH,
+        GAME_HEIGHT,
+        GAME_LEFT_OFFSET,
+        GAME_TOP_OFFSET,
+        
+        /* GAME TEXT */
+        GAME_TITLE_TEXT,
+        EXIT_REQUEST_TEXT,
+        INVALID_XML_FILE_ERROR_TEXT,
+        ERROR_DIALOG_TITLE_TEXT,
+        
+        /* ERROR TYPES */
+        AUDIO_FILE_ERROR,
+        LOAD_LEVEL_ERROR,
+        RECORD_SAVE_ERROR,
+
+        /* IMAGE FILE NAMES */
+        WINDOW_ICON,
+        SPLASH_BACKGROUND_IMAGE_NAME,
+        SAGA_BACKGROUND_IMAGE_NAME,
+        GAME_BACKGROUND_IMAGE_NAME,
+            //Saga UI elements
+        SAGA_QUIT_BUTTON_IMAGE_NAME,
+	SAGA_QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        SAGA_SCROLL_UP_BUTTON_IMAGE_NAME,
+	SAGA_SCROLL_UP_BUTTON_MOUSE_OVER_IMAGE_NAME,
+	SAGA_SCROLL_DOWN_BUTTON_IMAGE_NAME,
+	SAGA_SCROLL_DOWN_BUTTON_MOUSE_OVER_IMAGE_NAME, 	
+            //Saga UI Level Buttons Types
+        SAGA_LEVEL_BUTTON_SWAP_IMAGE_NAME,
+	SAGA_LEVEL_BUTTON_SWAP_MOUSE_OVER_IMAGE_NAME,
+	SAGA_LEVEL_BUTTON_JELLY_IMAGE_NAME,
+	SAGA_LEVEL_BUTTON_JELLY_MOUSE_OVER_IMAGE_NAME,
+            //Level Score UI elements
+        LEVEL_SCORE_BACKGROUND_IMAGE_NAME,
+        LEVEL_SCORE_PLAY_BUTTON_IMAGE_NAME,
+        LEVEL_SCORE_PLAY_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        LEVEL_SCORE_QUIT_BUTTON_IMAGE_NAME,
+        LEVEL_SCORE_QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME,
+            //Gameplay UI Elements
+        GAMEPLAY_BACKGROUND_IMAGE_NAME,
+        GAMEPLAY_QUIT_BUTTON_IMAGE_NAME,
+        GAMEPLAY_QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        
+        BLANK_TILE_IMAGE_NAME,
+        BLANK_TILE_SELECTED_IMAGE_NAME,
+        NEW_BUTTON_IMAGE_NAME,
+        NEW_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        BACK_BUTTON_IMAGE_NAME,
+        BACK_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        TILES_COUNT_IMAGE_NAME, 
+        TIME_IMAGE_NAME,
+        STATS_BUTTON_IMAGE_NAME,
+        STATS_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        UNDO_BUTTON_IMAGE_NAME,
+        UNDO_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        TILE_STACK_IMAGE_NAME,
+        
+        // AND THE DIALOGS
+        STATS_DIALOG_IMAGE_NAME,
+        WIN_DIALOG_IMAGE_NAME,
+        LOSS_DIALOG_IMAGE_NAME,
+        
+        
+        
+        
+        /* Splash Loading Stuff */
+        SPLASH_OPTIONS,
+        SPLASH_IMAGE_OPTIONS,
+        SPLASH_MOUSE_OVER_IMAGE_OPTIONS,
+
+        /* TILE LOADING STUFF */
+        LEVEL_OPTIONS,
+        LEVEL_IMAGE_OPTIONS,
+        LEVEL_MOUSE_OVER_IMAGE_OPTIONS,
+        TYPE_A_TILES,
+        TYPE_B_TILES,
+        TYPE_C_TILES,
+        
+        /* AUDIO CUES */
+        SELECT_AUDIO_CUE,
+        MATCH_AUDIO_CUE,
+        NO_MATCH_AUDIO_CUE,
+        BLOCKED_TILE_AUDIO_CUE,
+        UNDO_AUDIO_CUE,
+        WIN_AUDIO_CUE,
+        LOSS_AUDIO_CUE,
+        SPLASH_SCREEN_SONG_CUE,
+        GAMEPLAY_SONG_CUE
+    }
+}

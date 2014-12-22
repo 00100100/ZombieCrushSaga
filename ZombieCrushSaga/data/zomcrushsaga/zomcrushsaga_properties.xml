@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The properties in this file are specific to the Zombie Crush Saga flavor of the game.
+-->
+<properties>
+    <property_list>    
+        <property name="GAME_TITLE_TEXT"            		value="Zombie Crush Saga"></property>
+        <property name="WINDOW_ICON"                		value="./zomcrushsaga/gameIcon.png"></property>
+        
+        <!-- BIG, FULL VIEWPORT BACKGROUND SCREEN IMAGES -->
+        <property name="SPLASH_BACKGROUND_IMAGE_NAME"   		value="./zomcrushsaga/splash/UIZomcrushsagaSplashBackground.png"></property>
+        <property name="GAME_BACKGROUND_IMAGE_NAME" 		value="./zomcrushsaga/UIZomjongGameBackground.png"></property>
+		
+		<!-- SAGA Screen Images -->
+		<property name="SAGA_BACKGROUND_IMAGE_NAME" 					value="./zomcrushsaga/saga/UIZomcrushsagaSagaMap.png"></property>
+		<property name="SAGA_QUIT_BUTTON_IMAGE_NAME" 					value="./zomcrushsaga/saga/UISagaQuit.png"></property>
+		<property name="SAGA_QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME" 		value="./zomcrushsaga/saga/UISagaQuitMouseOver.png"></property>
+		<property name="SAGA_SCROLL_UP_BUTTON_IMAGE_NAME" 				value="./zomcrushsaga/saga/UISagaScrollUp.png"></property>
+		<property name="SAGA_SCROLL_UP_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/saga/UISagaScrollUpMouseOver.png"></property>
+		<property name="SAGA_SCROLL_DOWN_BUTTON_IMAGE_NAME" 			value="./zomcrushsaga/saga/UISagaScrollDown.png"></property>
+		<property name="SAGA_SCROLL_DOWN_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/saga/UISagaScrollDownMouseOver.png"></property>
+			<!-- Level Button Types -->
+		<property name="SAGA_LEVEL_BUTTON_SWAP_IMAGE_NAME" 				value="./zomcrushsaga/saga/levelButtons/UIlevelButtonSwap.png"></property>
+		<property name="SAGA_LEVEL_BUTTON_SWAP_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/saga/levelButtons/UIlevelButtonSwapMouseOver.png"></property>
+		<property name="SAGA_LEVEL_BUTTON_JELLY_IMAGE_NAME" 			value="./zomcrushsaga/saga/levelButtons/UIlevelButtonJelly.png"></property>
+		<property name="SAGA_LEVEL_BUTTON_JELLY_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/saga/levelButtons/UIlevelButtonJellyMouseOver.png"></property>
+		
+		<!-- Level Score Screen Images -->
+		<property name="LEVEL_SCORE_BACKGROUND_IMAGE_NAME" 				value="./zomcrushsaga/levels/UIlevelScoreBackground.png"></property>
+		<property name="LEVEL_SCORE_PLAY_BUTTON_IMAGE_NAME" 			value="./zomcrushsaga/levels/UILevelScorePlay.png"></property>
+		<property name="LEVEL_SCORE_PLAY_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/levels/UILevelScorePlayMouseOver.png"></property>
+		<property name="LEVEL_SCORE_QUIT_BUTTON_IMAGE_NAME" 			value="./zomcrushsaga/levels/UILevelScoreQuit.png"></property>
+		<property name="LEVEL_SCORE_QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/levels/UILevelScoreQuitMouseOver.png"></property>
+		
+		<property name="LEVEL_SCORE_STAR_IMAGE_NAME" 	value="./zomcrushsaga/levels/LevelScoreStar.png"></property>
+		
+		<!-- Gameplay Screen Images -->
+		<property name="GAMEPLAY_BACKGROUND_IMAGE_NAME" 				value="./zomcrushsaga/gameplay/UIZomcrushsagaGameplayBackground.png"></property>
+		<property name="GAMEPLAY_QUIT_BUTTON_IMAGE_NAME" 				value="./zomcrushsaga/gameplay/UIGameplayQuit.png"></property>
+		<property name="GAMEPLAY_QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/gameplay/UIGameplayQuitMouseOver.png"></property>
+		<property name="GAMEPLAY_REPLAY_BUTTON_IMAGE_NAME" 				value="./zomcrushsaga/gameplay/UIGameplayReplay.png"></property>
+		<property name="GAMEPLAY_REPLAY_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/gameplay/UIGameplayReplayMouseOver.png"></property>
+		<property name="GAMEPLAY_SMASHER_BUTTON_IMAGE_NAME" 			value="./zomcrushsaga/gameplay/UIGameplaySmasher.png"></property>
+		<property name="GAMEPLAY_SMASHER_BUTTON_MOUSE_OVER_IMAGE_NAME" 	value="./zomcrushsaga/gameplay/UIGameplaySmasherMouseOver.png"></property>
+		<property name="CURSOR_ZOMBIE_SMASHER" 							value="./zomcrushsaga/gameplay/CursorZombieSmasher.png"></property>
+		
+		<property name="BOARD_SPACE_IMAGE_NAME" 				value="./zomcrushsaga/gameplay/UIBoardSpace.png"></property>
+		<property name="BOARD_JELLY_IMAGE_NAME" 				value="./zomcrushsaga/gameplay/UIBoardJelly.png"></property>
+		<property name="BOARD_JELLY_ANIMATED_IMAGE_NAME" 		value="./zomcrushsaga/gameplay/UIBoardJellyAnimated.png"></property>
+		
+		
+		<property name="ZOMBIE_BLANK_IMAGE_NAME" 				value="./zomcrushsaga/gameplay/UIZombieBlank.png"></property>
+		<property name="ZOMBIE_SELECTED_IMAGE_NAME" 			value="./zomcrushsaga/gameplay/UIZombieSelected.png"></property>
+		
+		
+        <!-- DIALOG IMAGES -->
+        <property name="WIN_DIALOG_IMAGE_NAME"             	value="./zomcrushsaga/UIZomjongWinDialog.png"></property>
+		<property name="LOSS_DIALOG_IMAGE_NAME"             value="./zomcrushsaga/UIZomjongLossDialog.png"></property>
+        <property name="STATS_DIALOG_IMAGE_NAME"           	value="./zomcrushsaga/UIZomjongStatsDialog.png"></property>
+
+        <!-- BASE TILE RENDERING IMAGES -->
+        <property name="BLANK_TILE_IMAGE_NAME"              value="./zomcrushsaga/UIZomjongBlankTile.png"></property>
+        <property name="BLANK_TILE_SELECTED_IMAGE_NAME"     value="./zomcrushsaga/UIZomjongBlankTileSelected.png"></property>
+        
+        <!-- AUDIO FILES -->
+        <property name="SELECT_AUDIO_CUE"                   value="./zomcrushsaga/AudioZomjongSelectTile.wav"></property>
+        <property name="MATCH_AUDIO_CUE"                    value="./zomcrushsaga/AudioZomjongMatchFound.wav"></property>
+        <property name="NO_MATCH_AUDIO_CUE"                 value="./zomcrushsaga/AudioZomjongTilesDoNotMatch.wav"></property>
+        <property name="BLOCKED_TILE_AUDIO_CUE"             value="./zomcrushsaga/AudioZomjongBlockedTile.wav"></property>
+        <property name="UNDO_AUDIO_CUE"                     value="./zomcrushsaga/AudioZomjongUndo.wav"></property>
+        <property name="WIN_AUDIO_CUE"                      value="./zomcrushsaga/AudioZomjongWin.wav"></property>
+		<property name="LOSS_AUDIO_CUE"                     value="./zomcrushsaga/AudioZomjongLoss.wav"></property>
+        <property name="SPLASH_SCREEN_SONG_CUE"             value="./zomcrushsaga/AudioZomjongSplashScreenSong.mid"></property>
+        <property name="GAMEPLAY_SONG_CUE"                  value="./zomcrushsaga/AudioZomjongInGameSong.mid"></property>        
+    </property_list>
+    <property_options_list>
+		<property_options name="SPLASH_OPTIONS">
+			<option>SPLASH_PLAY_BUTTON_TYPE</option>
+			<option>SPLASH_RESET_BUTTON_TYPE</option>
+			<option>SPLASH_QUIT_BUTTON_TYPE</option>
+		</property_options>
+		<property_options name="SPLASH_IMAGE_OPTIONS">
+			<option>./zomcrushsaga/splash/UISplashPlay.png</option>
+			<option>./zomcrushsaga/splash/UISplashReset.png</option>
+			<option>./zomcrushsaga/splash/UISplashQuit.png</option>
+		</property_options>
+		  <property_options name="SPLASH_MOUSE_OVER_IMAGE_OPTIONS">
+            <option>./zomcrushsaga/splash/UISplashPlayMouseOver.png</option>
+            <option>./zomcrushsaga/splash/UISplashResetMouseOver.png</option>
+            <option>./zomcrushsaga/splash/UISplashQuitMouseOver.png</option>
+        </property_options>
+        <property_options name="LEVEL_OPTIONS">
+            <option>./zomcrushsaga/level_1.zom</option>
+            <option>./zomcrushsaga/level_2.zom</option>
+			<option>./zomcrushsaga/level_3.zom</option>
+			<option>./zomcrushsaga/level_4.zom</option>
+			<option>./zomcrushsaga/level_5.zom</option>
+			<option>./zomcrushsaga/level_6.zom</option>
+			<option>./zomcrushsaga/level_7.zom</option>
+			<option>./zomcrushsaga/level_8.zom</option>
+			<option>./zomcrushsaga/level_9.zom</option>
+			<option>./zomcrushsaga/level_10.zom</option>
+        </property_options>
+        <property_options name="LEVEL_IMAGE_OPTIONS">
+            <option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwap.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwap.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwap.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwap.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwap.png</option>
+            <option>./zomcrushsaga/saga/levelButtons/UILevelButtonJelly.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJelly.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJelly.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJelly.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJelly.png</option>
+        </property_options>
+        <property_options name="LEVEL_MOUSE_OVER_IMAGE_OPTIONS">
+            <option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwapMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwapMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwapMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwapMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonSwapMouseOver.png</option>
+            <option>./zomcrushsaga/saga/levelButtons/UILevelButtonJellyMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJellyMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJellyMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJellyMouseOver.png</option>
+			<option>./zomcrushsaga/saga/levelButtons/UILevelButtonJellyMouseOver.png</option>
+        </property_options>
+		
+		<property_options name="ZOMBIE_COLORS"> <!-- abc order -->
+			<option>./zomcrushsaga/gameplay/ZombieBlue.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieGreen.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieOrange.png</option>
+            <option>./zomcrushsaga/gameplay/ZombiePurple.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieRed.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieYellow.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieBlueStripedHorizontal.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieGreenStripedHorizontal.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieOrangeStripedHorizontal.png</option>
+            <option>./zomcrushsaga/gameplay/ZombiePurpleStripedHorizontal.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieRedStripedHorizontal.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieYellowStripedHorizontal.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieBlueStripedVertical.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieGreenStripedVertical.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieOrangeStripedVertical.png</option>
+            <option>./zomcrushsaga/gameplay/ZombiePurpleStripedVertical.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieRedStripedVertical.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieYellowStripedVertical.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieBlueWrapped.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieGreenWrapped.png</option>
+            <option>./zomcrushsaga/gameplay/ZombieOrangeWrapped.png</option>
+            <option>./zomcrushsaga/gameplay/ZombiePurpleWrapped.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieRedWrapped.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieYellowWrapped.png</option>
+			<option>./zomcrushsaga/gameplay/ZombieFive.png</option>
+        </property_options>
+    </property_options_list>
+</properties>

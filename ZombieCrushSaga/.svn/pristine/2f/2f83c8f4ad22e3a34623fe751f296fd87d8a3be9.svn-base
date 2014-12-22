@@ -1,0 +1,51 @@
+package zombie_crush_saga.events;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import zombie_crush_saga.ui.ZombieCrushSagaMiniGame;
+
+/**
+ * This event handler responds to when the user clicks on the Back
+ * button, which triggers going back to the splash screen.
+ * 
+ * @author Richard McKenna
+ */
+public class BackHandler implements ActionListener
+{
+
+    // HERE'S THE GAME WE'LL UPDATE
+    private ZombieCrushSagaMiniGame game;
+    
+    /**
+     * This constructor simply inits the object by 
+     * keeping the game for later.
+     * 
+     * @param initGame The Mahjong game that contains
+     * the back button.
+     */
+    public BackHandler(ZombieCrushSagaMiniGame initMiniGame)
+    {
+        game = initMiniGame;
+    }
+
+    /**
+     * This method provides the response, which is simply to
+     * stop the game and go back to the splash screen (home page).
+     * 
+     * @param ae Event object.
+     */
+    @Override
+    public void actionPerformed(ActionEvent ae)
+    {
+        
+        // IF THERE IS A GAME UNDERWAY, COUNT IT AS A LOSS
+        if (game.getDataModel().inProgress())
+        {
+            game.getDataModel().endGameAsLoss();
+        }
+        // RESET THE GAME AND ITS DATA
+        game.reset();
+        
+        game.switchToSplashScreen();
+    }
+}

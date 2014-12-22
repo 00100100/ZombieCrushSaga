@@ -1,0 +1,37 @@
+package zombie_crush_saga.events;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import zombie_crush_saga.ui.ZombieCrushSagaMiniGame;
+import static zombie_crush_saga.ZombieCrushSagaConstants.*;
+
+/**
+ * This class manages when the user clicks the splash's quit button
+ * 
+ * @author Richard McKenna
+ */
+public class SplashQuitHandler implements ActionListener
+{
+    private ZombieCrushSagaMiniGame miniGame;
+    
+    public SplashQuitHandler(ZombieCrushSagaMiniGame initMiniGame)
+    {
+        miniGame = initMiniGame;
+    }
+    
+    /**
+     * This method is called when the user clicks the splash's quit button.
+     * 
+     * @param ae the event object for the button press
+     */
+    @Override
+    public void actionPerformed(ActionEvent ae)
+    {
+        // WE ONLY LET THIS HAPPEN IF THE SPLASH/SAGA SCREEN IS VISIBLE
+        if (miniGame.isCurrentScreenState(SPLASH_SCREEN_STATE) 
+                || miniGame.isCurrentScreenState(SAGA_SCREEN_STATE))
+        {
+            System.exit(0);
+        }
+    }
+}

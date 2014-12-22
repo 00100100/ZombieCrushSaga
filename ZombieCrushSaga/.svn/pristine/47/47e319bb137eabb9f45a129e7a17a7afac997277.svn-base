@@ -1,0 +1,27 @@
+
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package zombie_crush_saga.data;
+import static zombie_crush_saga.ZombieCrushSagaConstants.*;
+
+/**
+ *
+ * @author Luigi Keh
+ */
+public class ZombieCrushSagaBoardZombies {
+    
+    private int[][] boardZombies;
+    
+    public ZombieCrushSagaBoardZombies(int rows, int columns) {
+        
+        boardZombies = new int[BOARD_ROWS][BOARD_COLUMNS];
+        
+    }
+    
+    
+    
+    
+}

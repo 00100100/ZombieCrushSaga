@@ -1,0 +1,219 @@
+package zombie_crush_saga.file;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import zombie_crush_saga.ZombieCrushSaga.ZombieCrushSagaPropertyType;
+import zombie_crush_saga.data.ZombieCrushSagaDataModel;
+import zombie_crush_saga.data.ZombieCrushSagaRecord;
+import zombie_crush_saga.ui.ZombieCrushSagaMiniGame;
+import properties_manager.PropertiesManager;
+import zombie_crush_saga.data.ZombieCrushSagaLevelRecord;
+
+/**
+ * This class provides services for efficiently loading and saving
+ * binary files for the ZombieCrushSaga game application.
+ * 
+ * @author Richard McKenna
+ */
+public class ZombieCrushSagaFileManager
+{
+    // WE'LL LET THE GAME KNOW WHEN DATA LOADING IS COMPLETE
+    private ZombieCrushSagaMiniGame miniGame;
+    
+    /**
+     * Constructor for initializing this file manager, it simply keeps
+     * the game for later.
+     * 
+     * @param initMiniGame The game for which this class loads data.
+     */
+    public ZombieCrushSagaFileManager(ZombieCrushSagaMiniGame initMiniGame)
+    {
+        // KEEP IT FOR LATER
+        miniGame = initMiniGame;
+    }
+
+    /**
+     * This method loads the contents of the levelFile argument so that
+     * the player may then play that level. 
+     * 
+     * @param levelFile Level to load.
+     */
+    public void loadLevel(String levelFile)
+    {
+        // LOAD THE RAW DATA SO WE CAN USE IT
+        // OUR LEVEL FILES WILL HAVE THE DIMENSIONS FIRST,
+        // FOLLOWED BY THE GRID VALUES
+        try
+        {
+            File fileToOpen = new File(levelFile);
+
+            // LET'S USE A FAST LOADING TECHNIQUE. WE'LL LOAD ALL OF THE
+            // BYTES AT ONCE INTO A BYTE ARRAY, AND THEN PICK THAT APART.
+            // THIS IS FAST BECAUSE IT ONLY HAS TO DO FILE READING ONCE
+            byte[] bytes = new byte[Long.valueOf(fileToOpen.length()).intValue()];
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+            FileInputStream fis = new FileInputStream(fileToOpen);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            
+            // HERE IT IS, THE ONLY READY REQUEST WE NEED
+            bis.read(bytes);
+            bis.close();
+            
+            // NOW WE NEED TO LOAD THE DATA FROM THE BYTE ARRAY
+            DataInputStream dis = new DataInputStream(bais);
+            
+            // NOTE THAT WE NEED TO LOAD THE DATA IN THE SAME
+            // ORDER AND FORMAT AS WE SAVED IT
+            
+            ZombieCrushSagaDataModel dataModel = (ZombieCrushSagaDataModel)miniGame.getDataModel();
+            
+            // 1st and 2ndly READ THE GRID DIMENSIONS
+            int initGridColumns = dis.readInt();
+            int initGridRows = dis.readInt();
+            
+            //3rd get level type
+            //0 = swap, 1 = jelly
+            dataModel.setLevelType(dis.readInt());
+            
+            //4th
+            int[][] boardSpace = new int[initGridRows][initGridColumns];
+            // AND NOW ALL THE SPACE VALUES
+            for (int i = 0; i < initGridRows; i++)
+            {                        
+                for (int j = 0; j < initGridColumns; j++)
+                {
+                    boardSpace[i][j] = dis.readInt();
+                }
+            }
+            
+            //5th
+            int[][] boardJelly = new int[initGridRows][initGridColumns];
+            // AND NOW ALL THE Jelly VALUES
+            for (int i = 0; i < initGridRows; i++)
+            {                        
+                for (int j = 0; j < initGridColumns; j++)
+                {
+                    boardJelly[i][j] = dis.readInt();
+                }
+            }
+            
+            // EVERYTHING WENT AS PLANNED SO LET'S MAKE IT PERMANENT
+            
+            //6th moves
+            dataModel.setMoves(dis.readInt());
+            //7th, 8th, 9th; star goal 1, star goal 2, star goal 3.
+            int[] starGoals = {dis.readInt(), dis.readInt(), dis.readInt()};
+            dataModel.setStarGoal(starGoals);
+            
+            dataModel.initLevelGrid(boardSpace, boardJelly);
+            dataModel.setCurrentLevel(levelFile);
+            
+            miniGame.updateBoundaries();
+        }
+        catch(Exception e)
+        {
+            // LEVEL LOADING ERROR
+            miniGame.getErrorHandler().processError(ZombieCrushSagaPropertyType.LOAD_LEVEL_ERROR);
+            System.out.println("FileManager: LEVEL LOAD ERROR!");
+        }
+    }    
+    
+     /**
+     * This method loads the player record from the records file
+     * so that the user may view stats.
+     * 
+     */
+    public void saveRecord()
+    {
+        // LOAD THE RAW DATA SO WE CAN USE IT
+        // OUR LEVEL FILES WILL HAVE THE DIMENSIONS FIRST,
+        // FOLLOWED BY THE GRID VALUES
+        try
+        {
+            //get the file in the filePath.
+            PropertiesManager props = PropertiesManager.getPropertiesManager();
+            String dataPath = props.getProperty(ZombieCrushSagaPropertyType.DATA_PATH);
+            String recordPath = dataPath + props.getProperty(ZombieCrushSagaPropertyType.RECORD_FILE_NAME);
+            File fileToOpen = new File(recordPath);
+
+            //get the current record in byte array form.
+            byte[] recordToSave = miniGame.getPlayerRecord().toByteArray();
+            
+            //open up a stream
+            FileOutputStream fos = new FileOutputStream(fileToOpen);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            
+            //write over the file completely with the new file.
+            bos.write(recordToSave);
+            bos.close();
+        }
+        catch(Exception e)
+        {
+            // THERE WAS NO RECORD TO LOAD, SO WE'LL JUST RETURN AN
+            // EMPTY ONE AND SQUELCH THIS EXCEPTION
+        }        
+        
+    }
+    
+    /**
+     * This method loads the player record from the records file
+     * so that the user may view stats.
+     * 
+     * @return The fully loaded record from the player record file.
+     */
+    public ZombieCrushSagaRecord loadRecord()
+    {
+        ZombieCrushSagaRecord recordToLoad = new ZombieCrushSagaRecord();
+        
+        // LOAD THE RAW DATA SO WE CAN USE IT
+        // OUR LEVEL FILES WILL HAVE THE DIMENSIONS FIRST,
+        // FOLLOWED BY THE GRID VALUES
+        try
+        {
+            PropertiesManager props = PropertiesManager.getPropertiesManager();
+            String dataPath = props.getProperty(ZombieCrushSagaPropertyType.DATA_PATH);
+            String recordPath = dataPath + props.getProperty(ZombieCrushSagaPropertyType.RECORD_FILE_NAME);
+            File fileToOpen = new File(recordPath);
+
+            // LET'S USE A FAST LOADING TECHNIQUE. WE'LL LOAD ALL OF THE
+            // BYTES AT ONCE INTO A BYTE ARRAY, AND THEN PICK THAT APART.
+            // THIS IS FAST BECAUSE IT ONLY HAS TO DO FILE READING ONCE
+            byte[] bytes = new byte[Long.valueOf(fileToOpen.length()).intValue()];
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+            FileInputStream fis = new FileInputStream(fileToOpen);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            
+            // HERE IT IS, THE ONLY READY REQUEST WE NEED
+            bis.read(bytes);
+            bis.close();
+            
+            // NOW WE NEED TO LOAD THE DATA FROM THE BYTE ARRAY
+            DataInputStream dis = new DataInputStream(bais);
+            
+            // NOTE THAT WE NEED TO LOAD THE DATA IN THE SAME
+            // ORDER AND FORMAT AS WE SAVED IT
+            // FIRST READ THE NUMBER OF LEVELS
+            int numLevels = dis.readInt();
+
+            for (int i = 0; i < numLevels; i++)
+            {
+                String levelName = dis.readUTF();
+                ZombieCrushSagaLevelRecord rec = new ZombieCrushSagaLevelRecord();
+                rec.gamesPlayed = dis.readInt();
+                rec.highScore = dis.readInt();
+                recordToLoad.addZombieCrushSagaLevelRecord(levelName, rec);
+            }
+        }
+        catch(Exception e)
+        {
+            // THERE WAS NO RECORD TO LOAD, SO WE'LL JUST RETURN AN
+            // EMPTY ONE AND SQUELCH THIS EXCEPTION
+        }        
+        return recordToLoad;
+    }
+}

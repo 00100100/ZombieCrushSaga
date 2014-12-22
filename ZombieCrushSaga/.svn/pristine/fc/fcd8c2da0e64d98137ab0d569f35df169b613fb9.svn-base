@@ -1,0 +1,73 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package zombie_crush_saga.data;
+import java.io.IOException;
+import xml_utilities.InvalidXMLFileFormatException;
+import zombie_crush_saga.ZombieCrushSaga;
+import static zombie_crush_saga.ZombieCrushSagaConstants.*;
+import zombie_crush_saga.ui.MahjongSolitaireErrorHandler;
+
+/**
+ *
+ * @author Luigi Keh
+ */
+public class ZombieCrushSagaBoardSpace {
+    
+    
+    //this will represent the board. 0 = not usable at all, 1 = usable by pieces.
+    private int[][] theBoard;
+    private ZombieCrushSagaBoardZombies boardZombies;
+    
+    public ZombieCrushSagaBoardSpace() {
+        
+        theBoard = new int[BOARD_ROWS][BOARD_COLUMNS];
+        boardZombies = new ZombieCrushSagaBoardZombies(BOARD_ROWS, BOARD_COLUMNS);
+    }
+    
+    //
+    public void initBoard(int[][] initBoard){
+        
+        try
+        {
+            if(initBoard.length != BOARD_ROWS)
+                throw new IOException();
+            if(initBoard[0].length != BOARD_COLUMNS)
+                throw new IOException();
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex + "bad matrix size, bad!" );
+        }
+        
+        //theboard = initBoard
+        for(int i = 0; i < BOARD_ROWS; i++){
+            for(int j = 0; j < BOARD_COLUMNS; i++){
+                theBoard[i][j] = initBoard[i][j];
+            }
+        }
+
+    
+    
+        
+        
+        
+        
+    }
+    
+    
+    public int getBoardSize(){
+        return BOARD_ROWS * BOARD_COLUMNS;
+    }
+    
+     public int getRowSize(){
+        return BOARD_ROWS;
+    }
+    
+     public int getColumnSize(){
+        return BOARD_COLUMNS;
+    }
+    
+    
+}

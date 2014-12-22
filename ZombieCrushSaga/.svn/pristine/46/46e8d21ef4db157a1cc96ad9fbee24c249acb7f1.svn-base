@@ -1,0 +1,143 @@
+package mahjong_solitaire;
+
+import javax.swing.JFrame;
+import mahjong_solitaire.ui.MahjongSolitaireMiniGame;
+import mahjong_solitaire.ui.MahjongSolitaireErrorHandler;
+import xml_utilities.InvalidXMLFileFormatException;
+import properties_manager.PropertiesManager;
+
+/**
+ * Mahjong Solitaire is a game application that's ready to be customized
+ * to play different flavors of the game. It has been setup using art
+ * from Plants vs. Zombies (i.e. Zomjong).
+ * 
+ * @author Richard McKenna
+ */
+public class MahjongSolitaire
+{
+    // THIS HAS THE FULL USER INTERFACE AND ONCE IN EVENT
+    // HANDLING MODE, BASICALLY IT BECOMES THE FOCAL
+    // POINT, RUNNING THE UI AND EVERYTHING ELSE
+    static MahjongSolitaireMiniGame miniGame = new MahjongSolitaireMiniGame();
+    
+    // WE'LL LOAD ALL THE UI AND ART PROPERTIES FROM FILES,
+    // BUT WE'LL NEED THESE VALUES TO START THE PROCESS
+    static String PROPERTY_TYPES_LIST = "property_types.txt";
+    static String UI_PROPERTIES_FILE_NAME = "properties.xml";
+    static String PROPERTIES_SCHEMA_FILE_NAME = "properties_schema.xsd";    
+    static String DATA_PATH = "./data/";
+
+    /**
+     * This is where the Mahjong Solitaire game application starts execution. We'll
+     * load the application properties and then use them to build our
+     * user interface and start the window in event handling mode. Once
+     * in that mode, all code execution will happen in response to a 
+     * user request.
+     */
+    public static void main(String[] args)
+    {
+        new JFrame();
+        try
+        {
+            // LOAD THE SETTINGS FOR STARTING THE APP
+            PropertiesManager props = PropertiesManager.getPropertiesManager();
+            props.addProperty(MahjongSolitairePropertyType.UI_PROPERTIES_FILE_NAME, UI_PROPERTIES_FILE_NAME);
+            props.addProperty(MahjongSolitairePropertyType.PROPERTIES_SCHEMA_FILE_NAME, PROPERTIES_SCHEMA_FILE_NAME);
+            props.addProperty(MahjongSolitairePropertyType.DATA_PATH.toString(), DATA_PATH);
+            props.loadProperties(UI_PROPERTIES_FILE_NAME, PROPERTIES_SCHEMA_FILE_NAME);
+            
+            // THEN WE'LL LOAD THE MAHJONG FLAVOR AS SPECIFIED BY THE PROPERTIES FILE
+            String gameFlavorFile = props.getProperty(MahjongSolitairePropertyType.GAME_FLAVOR_FILE_NAME);
+            props.loadProperties(gameFlavorFile, PROPERTIES_SCHEMA_FILE_NAME);
+                               
+            // NOW WE CAN LOAD THE UI, WHICH WILL USE ALL THE FLAVORED CONTENT
+            String appTitle = props.getProperty(MahjongSolitairePropertyType.GAME_TITLE_TEXT);
+            int fps = Integer.parseInt(props.getProperty(MahjongSolitairePropertyType.FPS));
+
+            //when i add my zomjong lvl 5, this shit crashes.
+            miniGame.initMiniGame(appTitle, fps);
+            miniGame.startGame();
+        }
+        // THERE WAS A PROBLEM LOADING THE PROPERTIES FILE
+        catch(InvalidXMLFileFormatException ixmlffe)
+        {
+            // LET THE ERROR HANDLER PROVIDE THE RESPONSE
+            MahjongSolitaireErrorHandler errorHandler = miniGame.getErrorHandler();
+            errorHandler.processError(MahjongSolitairePropertyType.INVALID_XML_FILE_ERROR_TEXT);
+        }
+    }
+    
+    /**
+     * Mahjong SolitairePropertyType represents the types of data that will need
+     * to be extracted from XML files.
+     */
+    public enum MahjongSolitairePropertyType
+    {
+        /* SETUP FILE NAMES */
+        UI_PROPERTIES_FILE_NAME,
+        PROPERTIES_SCHEMA_FILE_NAME,
+        GAME_FLAVOR_FILE_NAME,
+        RECORD_FILE_NAME,
+
+        /* DIRECTORIES FOR FILE LOADING */
+        AUDIO_PATH,
+        DATA_PATH,
+        IMG_PATH,
+        
+        /* WINDOW DIMENSIONS & FRAME RATE */
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        FPS,
+        GAME_WIDTH,
+        GAME_HEIGHT,
+        GAME_LEFT_OFFSET,
+        GAME_TOP_OFFSET,
+        
+        /* GAME TEXT */
+        GAME_TITLE_TEXT,
+        EXIT_REQUEST_TEXT,
+        INVALID_XML_FILE_ERROR_TEXT,
+        ERROR_DIALOG_TITLE_TEXT,
+        
+        /* ERROR TYPES */
+        AUDIO_FILE_ERROR,
+        LOAD_LEVEL_ERROR,
+        RECORD_SAVE_ERROR,
+
+        /* IMAGE FILE NAMES */
+        WINDOW_ICON,
+        SPLASH_SCREEN_IMAGE_NAME,
+        GAME_BACKGROUND_IMAGE_NAME,
+        BLANK_TILE_IMAGE_NAME,
+        BLANK_TILE_SELECTED_IMAGE_NAME,
+        NEW_BUTTON_IMAGE_NAME,
+        NEW_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        TILE_COUNT_IMAGE_NAME,
+        TIME_IMAGE_NAME,
+        STATS_BUTTON_IMAGE_NAME,
+        STATS_BUTTON_MOUSE_OVER_IMAGE_NAME,
+        TILE_STACK_IMAGE_NAME,
+        
+        // AND THE DIALOGS
+        STATS_DIALOG_IMAGE_NAME,
+        WIN_DIALOG_IMAGE_NAME,
+        
+        /* TILE LOADING STUFF */
+        LEVEL_OPTIONS,
+        LEVEL_IMAGE_OPTIONS,
+        LEVEL_MOUSE_OVER_IMAGE_OPTIONS,
+        TYPE_A_TILES,
+        TYPE_B_TILES,
+        TYPE_C_TILES,
+        
+        /* AUDIO CUES */
+        SELECT_AUDIO_CUE,
+        MATCH_AUDIO_CUE,
+        NO_MATCH_AUDIO_CUE,
+        BLOCKED_TILE_AUDIO_CUE,
+        UNDO_AUDIO_CUE,
+        WIN_AUDIO_CUE,
+        SPLASH_SCREEN_SONG_CUE,
+        GAMEPLAY_SONG_CUE
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The properties in this file are loaded when the Mahjong Solitaire game application
+    first loads. It should specify all that's needed to know to run a flavor of the
+    game, like where to load the zombie flavored game.
+-->
+<properties>
+    <property_list>    
+        <property name="GAME_FLAVOR_FILE_NAME"      value="./zomjong/zomjong_properties.xml"></property>
+        <property name="WINDOW_WIDTH"               value="1280"></property>
+        <property name="WINDOW_HEIGHT"              value="720"></property>
+        <property name="GAME_WIDTH"                 value="1280"></property>
+        <property name="GAME_HEIGHT"                value="700"></property>
+        <property name="GAME_LEFT_OFFSET"           value="20"></property>
+        <property name="GAME_TOP_OFFSET"            value="100"></property>
+        <property name="AUDIO_PATH"                 value="./audio/"></property>
+        <property name="IMG_PATH"                   value="./img/"></property>
+        <property name="FPS"                        value="30"></property>
+        <property name="RECORD_FILE_NAME"           value="PlayerRecord.dat"></property>
+    </property_list>
+
+    <property_options_list>
+    </property_options_list>
+</properties>

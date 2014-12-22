@@ -1,0 +1,36 @@
+LevelType Jelly
+
+Moves 50
+
+Star 1 60000
+Star 2 75000
+Star 3 85000
+
+Goal 0 Get One Star, Clear All Jelly
+Goal 1 Get Two Stars, Clear All Jelly
+Goal 2 Get Three Stars, Clear All Jelly
+Goal 3 Beat the high score, Clear All Jelly
+
+BoardSpace 1
+111111111
+111111111
+111111111
+111111111
+111111111
+111111111
+111111111
+111111111
+011111110
+
+BoardJelly 1
+000000000
+011101110
+111111111
+111111111
+111111111
+111111111
+011111110
+000111000
+000000000
+
+0

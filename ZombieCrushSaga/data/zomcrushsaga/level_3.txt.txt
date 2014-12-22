@@ -1,0 +1,27 @@
+LevelType Swap
+
+Moves 18
+
+Star 1 4000
+Star 2 6000
+Star 3 8000
+
+Goal 0 Get One Star
+Goal 1 Get Two Stars
+Goal 2 Get Three Stars
+Goal 3 Beat the high score
+
+BoardSpace 1
+000000000
+001111100
+011111110
+011111110
+011111110
+011111110
+011111110
+001111100
+000000000
+
+BoardJelly 0
+
+0
